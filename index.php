@@ -26,7 +26,7 @@ $topas = getasstats_top($ntop, $statsfile, $selected_links);
 $start = time() - $hours*3600;
 $end = time();
 
-if ($showv6) { $first_col = "1"; $second_col = "11"; $offset_second_col = "0";  } else { $first_col = "2"; $second_col = "9"; $offset_second_col = "1"; }
+if ($showv6) { $first_col = "2"; $second_col = "10"; $offset_second_col = "0";  } else { $first_col = "2"; $second_col = "10"; $offset_second_col = "0"; }
 
 // Mobile Detect for show legend
 $detect = new Mobile_Detect;
@@ -53,9 +53,9 @@ foreach ($topas as $as => $nbytes) {
   $aff_astable .= '<b>' . $img_flag . ' AS' . $as . ': </b><small><i>' . $asinfo['descr'] . '</i></small>';
 
   $aff_astable .= '<div class="small">In the last '. $label . '</div>';
-  $aff_astable .= '<div class="small">IPv4: ~ '.format_bytes($nbytes[0]).' in / ' . format_bytes($nbytes[1]) . '</div>';
+  $aff_astable .= '<div class="small">IPv4: ~ '.format_bytes($nbytes[0]).' in / ' . format_bytes($nbytes[1]) . ' out</div>';
   if ($showv6) {
-    $aff_astable .= '<div class="small">IPv6: ~ '.format_bytes($nbytes[2]).' in / ' . format_bytes($nbytes[3]) . '</div>';
+    $aff_astable .= '<div class="small">IPv6: ~ '.format_bytes($nbytes[2]).' in / ' . format_bytes($nbytes[3]) . ' out</div>';
   }
 
   // CUSTOM LINKS
@@ -215,7 +215,7 @@ if ( !$detect->isMobile() && !$detect->isTablet() ) {
                 } else {
               ?>
 
-              <div class="row affix col-md-12 col-lg-<?php echo $first_col; ?>">
+              <div>
 
                 <form method='get'>
                   <input type='hidden' name='numhours' value='<?php echo $hours; ?>'/>
