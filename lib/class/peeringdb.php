@@ -37,8 +37,13 @@ class PeeringDB {
       $json = $this->sendRequest($this->url."/netixlan?asn=".$asn);
 		  $json = json_decode($json);
 
-      if ( empty($json->data) ) { return 0; }
-      else { return $json->data; }
+      if ( empty($json->data) ) {
+        return 0;
+      }
+      else {
+      	usort($json->data, function($a, $b) {return strcmp($a->name, $b->name);});
+      	return $json->data;
+      }
     }
   }
 
