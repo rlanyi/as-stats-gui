@@ -52,7 +52,7 @@ $end = time();
 
 $cmd = "$rrdtool graph - " .
 	"--slope-mode --alt-autoscale -u 0 -l 0 --imgformat=PNG --base=1000 --height=$height --width=$width " .
-	"--color BACK#ffffff00 --color SHADEA#ffffff00 --color SHADEB#ffffff00 " .
+	"--color BACK#ffffffff --color SHADEA#ffffff00 --color SHADEB#ffffff00 " .
 	"--start " . $start . " --end " . $end . " ";
 
 if (!$compat_rrdtool12)
