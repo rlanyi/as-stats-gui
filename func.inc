@@ -44,6 +44,9 @@ function readasinfodb() {
 			continue;	/* empty line or comment */
 
 		$asnarr = explode("\t", $line);
+		if (count($asnarr) != 4) {
+			continue;
+		}
 		$asn = $asnarr[0];
 		$asname = $asnarr[1];
 		$descr = $asnarr[2];
