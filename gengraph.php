@@ -53,6 +53,8 @@ if(isset($_GET['selected_links'])){
 
 $rrdfile = getRRDFileForAS($as, $peerusage);
 
+$knownlinks = update_palette($knownlinks);
+
 if ($compat_rrdtool12) {
 	/* cannot use full-size-mode - must estimate height/width */
 	$height -= 65;

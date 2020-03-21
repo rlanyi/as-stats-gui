@@ -418,4 +418,40 @@ function box_linkusage ($title, $img) {
 	$return .= '</div>';
 	return $return;
 }
+
+function get_palette($name = 'splunk') {
+	$palettes = array(
+		'google' => ['3366CC', 'DC3912', 'FF9900', '109618', '990099', '3B3EAC', '0099C6', 'DD4477', '66AA00', 'B82E2E', '316395', '994499', '22AA99', 'AAAA11', '6633CC', 'E67300', '8B0707', '329262', '5574A6', '3B3EAC', ],
+		'd3schemePaired' => ['a6cee3', '1f78b4', 'b2df8a', '33a02c', 'fb9a99', 'e31a1c', 'fdbf6f', 'ff7f00', 'cab2d6', '6a3d9a', 'ffff99', 'b15928', ],
+		'd3category10' => ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf', ],
+		'd3schemeSet1' => ['e41a1c', '377eb8', '4daf4a', '984ea3', 'ff7f00', 'ffff33', 'a65628', 'f781bf', '999999', ],
+		'optimized' => ['4D4D4D', '5DA5DA', 'FAA43A', '60BD68', 'F17CB0', 'B2912F', 'B276B2', 'DECF3F', 'F15854'],
+		'sapQualitative' => ['5899DA', 'E8743B', '19A979', 'ED4A7B', '945ECF', '13A4B4', '525DF4', 'BF399E', '6C8893', 'EE6868', '2F6497'],
+		'splunk' => ['1e93c6', 'f2b827', 'd6563c', '6a5c9e', '31a35f', 'ed8440', '3863a0', 'a2cc3e', 'cc5068', '73427f', '11a88b', 'ea9600', '0e776d', 'ffb380', 'aa3977', '91af27', '4453aa', '99712b', '553577', '97bc71', 'd35c2d', '314d5b', '99962b', '844539', '00b290', 'e2c188', 'a34a41', '44416d', 'e29847', '8c8910', '0b416d', '774772', '3d9988', 'bdbd5e', '5f7396', '844539'],
+	);
+
+	if (array_key_exists($name, $palettes)) {
+		$palette = $palettes[$name];
+	} else {
+		$palette = $palettes['splunk'];
+	}
+
+	return $palette;
+}
+
+function update_palette($links, $name = 'splunk') {
+	$palette = get_palette($name);
+
+	$c = 0;
+	foreach ($links as $key => $link) {
+		if (isset($link['color'])) {
+			$links[$key]['color'] = $palette[$c++];
+		}
+		if ($c == count($palette)) {
+			$c = 0;
+		}
+	}
+
+	return $links;
+}
 ?>
