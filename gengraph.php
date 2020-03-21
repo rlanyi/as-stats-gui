@@ -53,6 +53,29 @@ if(isset($_GET['selected_links'])){
 
 $rrdfile = getRRDFileForAS($as, $peerusage);
 
+if (!isset($_GET['keep_all_links'])) {
+	exec(sprintf("/usr/bin/rrdtool info '%s' | grep '\.last_ds'", $rrdfile), $rrdinfo, $res);
+	if ($res == 0) {
+		$links_to_remove = array();
+		foreach ($knownlinks as $key => $link) {
+			$needed = false;
+			foreach (array('in', 'out', 'v6_in', 'v6_out') as $e) {
+				if (!in_array(sprintf('ds[%s_%s].last_ds = "U"', $link['tag'], $e), $rrdinfo)) {
+					$needed = true;
+				}
+			}
+
+			if (!$needed) {
+				$links_to_remove[] = $key;
+			}
+		}
+		
+		foreach ($links_to_remove as $link_key) {
+			unset($knownlinks[$link_key]);
+		}
+	}
+}
+
 $knownlinks = update_palette($knownlinks);
 
 if ($compat_rrdtool12) {
