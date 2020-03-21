@@ -50,7 +50,7 @@ foreach ($topas as $as => $nbytes) {
   $aff_astable .= '<div class="row">';
 
   $aff_astable .= '<div class="col-lg-2">';
-  $aff_astable .= '<b>' . $img_flag . ' AS' . $as . ': </b><small><i>' . $asinfo['descr'] . '</i></small>';
+  $aff_astable .= '<b>' . $img_flag . ' <a href="history.php?as=' . $as . '">AS' . $as . '</a>: </b><small><i>' . $asinfo['descr'] . '</i></small>';
 
   $aff_astable .= '<div class="small">In the last '. $label . '</div>';
   $aff_astable .= '<div class="small">IPv4: ~ '.format_bytes($nbytes[0]).' in / ' . format_bytes($nbytes[1]) . ' out</div>';
