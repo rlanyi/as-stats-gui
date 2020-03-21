@@ -78,6 +78,14 @@ if (!isset($_GET['keep_all_links'])) {
 
 $knownlinks = update_palette($knownlinks);
 
+if (!isset($_GET['keep_link_descr'])) {
+	foreach ($knownlinks as $key => $link) {
+		$knownlinks[$key]['descr'] = trim(preg_replace('/\{([^{}]*+|(?R))*\}/', '', $knownlinks[$key]['descr']));
+		$knownlinks[$key]['descr'] = trim(preg_replace('/\[([^\[\]]*+|(?R))*\]/', '', $knownlinks[$key]['descr']));
+		$knownlinks[$key]['descr'] = trim(preg_replace('!\s+!', ' ', $knownlinks[$key]['descr']));
+	}
+}
+
 if ($compat_rrdtool12) {
 	/* cannot use full-size-mode - must estimate height/width */
 	$height -= 65;
